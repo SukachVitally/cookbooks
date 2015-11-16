@@ -31,6 +31,18 @@ directory "#{node[:project_dir]}packages" do
     action :create
 end
 
+directory "#{node[:project_dir]}venvs" do
+    owner owner
+    group group
+    mode '0777'
+    action :create
+end
+
+execute 'venv init' do
+  command "virtualenv #{node[:project_dir]}venvs/test"
+  action :run
+end
+
 file "#{node[:project_dir]}packages/.htaccess" do
     content 'jenkins:$apr1$XqmmxIyK$yB4.4Pp46xOR6bouKk5yN1'
 end
