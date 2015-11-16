@@ -1,10 +1,17 @@
-# include_recipe 'build-essential::default'
+include_recipe 'build-essential::default'
+include_recipe 'python::pip'
+include_recipe 'python::virtualenv'
 
-python_runtime '2'
-python_virtualenv "#{node[:project_dir]}venv"
-python_package 'uwsgi'
-python_package 'pypiserver'
-python_package 'passlib'
+package 'postgresql-devel'
+package 'python-devel'
+package 'openssl-devel'
+package 'httpd-tools'
+package 'pcre'
+package 'pcre-devel'
+
+python_pip 'uwsgi'
+python_pip 'pypiserver'
+python_pip 'passlib'
 
 template "/etc/init.d/pypid" do
     source 'pypid.erb'
