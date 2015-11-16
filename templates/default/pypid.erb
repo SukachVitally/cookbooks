@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source "<%=@app_dir %>venv/bin/activate"
+
+case "$1" in
+    start)
+        echo -n "Starting pypi server "
+        pypi-server -p 8081 -P "<%=@app_dir %>packages/.htaccess" "<%=@app_dir %>packages" &>/dev/null &
+        ;;
+    stop)
+        echo -n "Shutting pypi server "
+        pkill pypi
+        ;;
+esac
+
