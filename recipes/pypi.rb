@@ -34,8 +34,9 @@ end
 file "#{node[:project_dir]}packages/.htaccess" do
     content 'jenkins:$apr1$XqmmxIyK$yB4.4Pp46xOR6bouKk5yN1'
 end
-
-template "home/vagrant/.pypirc" do
+user_home = "/#{node[:matching_node][:user]}"
+Chef::Log.warn("TTT - #{user_home} - TTTTTTTTTTT")
+template "#{user_home}.pypirc" do
     source 'pypirc.erb'
 end
 
